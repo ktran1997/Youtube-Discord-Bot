@@ -6,7 +6,7 @@ import os
 from discord.ext import commands
 from discord.utils import get
 
-TOKEN = 'NzMwNTU5ODcyNzkzNTc1NjA0.XwZTqQ._EiseKBPdmKU8Kpl6HlQaYnswmA'
+TOKEN = 'Discord Token'
 client = commands.Bot(command_prefix = '.')
 
 @client.event
