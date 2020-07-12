@@ -34,13 +34,9 @@ async def leave(ctx):
 	if voice and voice.is_connected():
 		await voice.disconnect()
 		await ctx.send(f"Left {channel}")
-
-@client.command(pass_context=True, aliases=['c', 'erase'])
-async def clear(ctx):
-	queues.clear()
-	print("Queues Cleared")
-	await ctx.send("Queues are officailly cleared")
-	return 
+	else: 
+		print("Bot was told to leave the voice channel, but was not in one")
+		await ctx.send("don't think I am in a voice channel")
 
 @client.command(pass_context=True, aliases=['a', 'activate'])
 async def play(ctx, url:str):
@@ -52,7 +48,6 @@ async def play(ctx, url:str):
 			still_q = length - 1
 			try: 
 				first_file = os.listdir(DIR)[0]
-				print("testing 3")
 			except:
 				print("No more queued song(s)\n")
 				queues.clear()
@@ -103,6 +98,9 @@ async def play(ctx, url:str):
 
 	except: 
 		print("No old Queue folder")
+
+
+
 
 	await ctx.send("Getting everything ready now")
 
@@ -158,20 +156,6 @@ async def resume(ctx):
 	else:
 		print("Music is not paused")
 		await ctx.send("Music is not paused")
-
-@client.command(pass_context=True, aliases=['d', 'dodge'])
-async def skip(ctx):
-	voice = get(client.voice_clients, guild=ctx.guild)
-
-	queues.clear()
-
-	if voice and voice.is_playing():
-		print("Music skipped")
-		voice.stop()
-		await ctx.send("Music skipped")
-	else: 
-		print("No music playing failed to skip")
-		await ctx.send("No music playing failed to skip")
 
 queues = {}
 
